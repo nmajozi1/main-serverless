@@ -1,0 +1,131 @@
+service: bored-serverless-functions
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: eu-west-1
+  iamRoleStatements: [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "lambda:InvokeFunction"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "dynamodb:*"
+        ],
+        "Resource": "*"
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "s3:*"
+        ],
+        "Resource": "*"
+      }
+    ]
+
+functions:
+  login: 
+    handler: dist/users/login.login
+    events:
+      - http:
+          path: users/login
+          method: post
+          cors: true
+  addUser:
+    handler: dist/users/add.add
+    events:
+      - http:
+          path: users/add
+          method: post
+          cors: true
+  deleteUser:
+    handler: dist/users/delete.delete
+    events:
+      - http:
+          path: users/delete
+          method: post
+          cors: true
+  addDashboard:
+    handler: dist/dashboards/add.add
+    events: 
+      - http: 
+          path: dashboard/add
+          method: post
+          cors: true
+  deleteDashboard:
+    handler: dist/dashboards/delete.delete
+    events: 
+      - http: 
+          path: dashboard/delete
+          method: post
+          cors: true
+  getDashboard:
+    handler: dist/dashboards/get.get
+    events: 
+      - http: 
+          path: dashboard/get
+          method: get
+          cors: true
+  getBudget:
+    handler: dist/budgets/get.get
+    events: 
+      - http: 
+          path: budget/get
+          method: post
+          cors: true
+  addBudget:
+    handler: dist/budgets/add.add
+    events: 
+      - http: 
+          path: budget/add
+          method: post
+          cors: true
+  updateBudget:
+    handler: dist/budgets/update.update
+    events: 
+      - http: 
+          path: budget/update
+          method: post
+          cors: true
+  deleteBudget:
+    handler: dist/budgets/delete.delete
+    events: 
+      - http: 
+          path: budget/delete
+          method: post
+          cors: true
+  getGoal:
+    handler: dist/goals/get.get
+    events: 
+      - http: 
+          path: goal/get
+          method: post
+          cors: true
+  addGoal:
+    handler: dist/goals/add.add
+    events: 
+      - http: 
+          path: goal/add
+          method: post
+          cors: true
+  deleteGoal:
+    handler: dist/goals/delete.delete
+    events: 
+      - http: 
+          path: goal/delete
+          method: post
+          cors: true
+  getCovid:
+    handler: dist/covid/get.get
+    events: 
+      - http: 
+          path: covid/get
+          method: get
+          cors: true
+  
+  
